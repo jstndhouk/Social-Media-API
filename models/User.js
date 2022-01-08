@@ -2,33 +2,43 @@ const {
   Schema,
   model
 } = require('mongoose');
-const thoughtsSchema = require('./Thought');
 
 // Schema to create Student model
-const userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    thoughts: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    thoughts: [thoughtsSchema],
+const userSchema = new Schema({
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
   },
-  // friends: }
-  {
-    toJSON: {
-      getters: true,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: function (v) {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      },
+      message: "Please enter a valid email"
     },
-  }
-);
+    required: [true, "Email required"]
+  },
+  thoughts: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'thought'
+    }
+  ],
+  friends: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+    }
+  ],
+  toJSON: {
+    getters: true
+  },
+});
 
 const User = model('user', userSchema);
 
