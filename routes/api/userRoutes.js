@@ -7,6 +7,8 @@ const {
 
 // /api/students
 router.route('/').get(getUsers).post(createUser);
+router.route('/:userId').get(getSingleUser)
+// .delete(deleteStudent);
 
 // /api/students/:studentId
 // router.route('/:studentId').get(getSingleUser).delete(deleteStudent);
