@@ -8,10 +8,10 @@ connection.once('open', async () => {
   console.log('connected');
 
   // Drop existing courses
-  await Reaction.deleteMany({});
-  // Drop existing students
-  await User.deleteMany({});
-  await Thought.deleteMany({});
+  // await Reaction.deleteMany({});
+  // // Drop existing students
+  // await User.deleteMany({});
+  // await Thought.deleteMany({});
 
   // Add students to the collection and await the results
   await User.collection.insertMany(userData);
