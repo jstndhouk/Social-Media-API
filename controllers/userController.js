@@ -5,7 +5,7 @@ const headCount = async () =>
   User.aggregate()
     .count('userCount')
     .then((numberOfUsers) => numberOfUsers);
-
+    
 module.exports = {
   // Get all users
   getUsers(req, res) {
@@ -44,7 +44,6 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-
   // Delete a user 
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
@@ -64,7 +63,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-
+//Update a user
   updateUser(req, res) {
     User.findOneAndUpdate({_id: req.params.userId}, {username: req.body.username, email: req.body.email}, {new:true})
      .select('-__v')
@@ -81,6 +80,7 @@ module.exports = {
       });
 
   },
+  //Add a friend to a user's friends list
   addFriend(req, res) {
     User.findOneAndUpdate({ _id: req.params.userId }, {$addToSet: {friends: req.params.friendId}}, {new:true, runValidators:true}, )
       .select('-__v')
@@ -93,6 +93,7 @@ module.exports = {
          return res.status(500).json(err);
         })
   },
+  //Delete a friend of a user's friend list.
   deleteFriend(req, res) {
     User.findOneAndUpdate({ _id: req.params.userId }, {$pull: {friends: req.params.friendId}}, {new:true, runValidators:true}, )
       .select('-__v')
@@ -106,39 +107,3 @@ module.exports = {
         })
   },
 }
-
-  // Add an assignment to a student
-//   addAssignment(req, res) {
-//     console.log('You are adding an assignment');
-//     console.log(req.body);
-//     Student.findOneAndUpdate(
-//       { _id: req.params.studentId },
-//       { $addToSet: { assignments: req.body } },
-//       { runValidators: true, new: true }
-//     )
-//       .then((student) =>
-//         !student
-//           ? res
-//               .status(404)
-//               .json({ message: 'No student found with that ID :(' })
-//           : res.json(student)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
-//   // Remove assignment from a student
-//   removeAssignment(req, res) {
-//     Student.findOneAndUpdate(
-//       { _id: req.params.studentId },
-//       { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
-//       { runValidators: true, new: true }
-//     )
-//       .then((student) =>
-//         !student
-//           ? res
-//               .status(404)
-//               .json({ message: 'No student found with that ID :(' })
-//           : res.json(student)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
-// };

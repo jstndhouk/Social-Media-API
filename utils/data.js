@@ -14,7 +14,5 @@
     {thoughtText: 'This is a second thought by Carter', username: 'cartergarrison'},
   ];
 
-
-
 // Export the functions for use in seed.js
 module.exports = { thoughtsData, userData };

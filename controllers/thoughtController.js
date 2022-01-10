@@ -11,7 +11,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
  
-   // Get a thought
+   //Get a single thought
    getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .select('-__v')
@@ -22,6 +22,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+  //Create a thought
    createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => {
@@ -41,7 +42,7 @@ module.exports = {
         return res.status(500).json(err);
       })
     },
-  
+    //Delete a thought
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -73,6 +74,7 @@ module.exports = {
          return res.status(500).json(err);
         })
   },
+  //Delet a reaction
   deleteReaction(req, res) {
     console.log(req.body)
     Thought.findOneAndUpdate({ _id: req.params.thoughtId }, {$pull: {reactions: {reactionId:req.params.reactionId}}}, {new:true, runValidators:true}, )
@@ -88,20 +90,3 @@ module.exports = {
         })
   }
 }
-
-//  
-//   // Update a course
-//   updateCourse(req, res) {
-//     Course.findOneAndUpdate(
-//       { _id: req.params.courseId },
-//       { $set: req.body },
-//       { runValidators: true, new: true }
-//     )
-//       .then((course) =>
-//         !course
-//           ? res.status(404).json({ message: 'No course with this id!' })
-//           : res.json(course)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
-// };
