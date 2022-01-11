@@ -44,4 +44,11 @@ To review the code, please go to the [Repository](https://github.com/jstndhouk/s
 Future development includes a front-end that handles the routes described.  A deployed application will be included here in the future.
 
 ## Mock-Up
-To review a demo of our application, click the following link: [Social-Media-API Demo]().
+To review a demo of our application, click the following links: 
+
+[Get all thoughts, get all users, get a single thought, get a single user](https://watch.screencastify.com/v/KDlUEh37c1VK1GZikJhi).
+
+[Create a user, delete a user, create a thought, delete a thought](https://watch.screencastify.com/v/NhjnAbCK7kEbW59wgvk3).
+
+[Create thought, delete a thought, add a friend, remove a friend](https://watch.screencastify.com/v/nqW2M7hVMsaO3NnhlLiI).
+
